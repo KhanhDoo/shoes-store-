@@ -7,72 +7,85 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        .logo a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
         .about-container {
             padding: 120px 5% 5rem;
         }
 
         .about-header {
+            background: linear-gradient(rgba(52, 58, 64, 0.9), rgba(33, 37, 41, 0.9));
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             text-align: center;
             margin-bottom: 4rem;
+            padding: 6rem 2rem;
+            border-radius: 15px;
+            color: white;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
         .about-header h1 {
-            color: #2c3e50;
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            color: #f8f9fa;
+            font-weight: 700;
         }
 
         .about-header p {
-            color: #666;
             max-width: 800px;
             margin: 0 auto;
-            line-height: 1.6;
+            line-height: 1.8;
+            font-size: 1.2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            color: #e9ecef;
         }
 
         .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
             margin-bottom: 4rem;
-        }
-
-        .about-image {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .about-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
         }
 
         .about-text h2 {
             color: #2c3e50;
             margin-bottom: 1.5rem;
+            font-size: 2rem;
         }
 
         .about-text p {
             color: #666;
             line-height: 1.8;
             margin-bottom: 1.5rem;
+            font-size: 1.1rem;
         }
 
         .features {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
             margin-bottom: 4rem;
         }
 
         .feature-card {
             background: #fff;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
             text-align: center;
             transition: transform 0.3s ease;
+            border: 1px solid #eee;
         }
 
         .feature-card:hover {
@@ -80,77 +93,21 @@
         }
 
         .feature-card i {
-            font-size: 2.5rem;
+            font-size: 3rem;
             color: #e74c3c;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         .feature-card h3 {
             color: #2c3e50;
             margin-bottom: 1rem;
+            font-size: 1.5rem;
         }
 
         .feature-card p {
             color: #666;
             line-height: 1.6;
-        }
-
-        .team-section {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .team-section h2 {
-            color: #2c3e50;
-            margin-bottom: 3rem;
-        }
-
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .team-member {
-            background: #fff;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .team-member img {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-        }
-
-        .member-info {
-            padding: 1.5rem;
-        }
-
-        .member-info h3 {
-            color: #2c3e50;
-            margin-bottom: 0.5rem;
-        }
-
-        .member-info p {
-            color: #666;
-            margin-bottom: 1rem;
-        }
-
-        .member-social {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-        }
-
-        .member-social a {
-            color: #2c3e50;
-            transition: color 0.3s ease;
-        }
-
-        .member-social a:hover {
-            color: #e74c3c;
+            font-size: 1.1rem;
         }
 
         .values-section {
@@ -161,44 +118,48 @@
         .values-section h2 {
             color: #2c3e50;
             margin-bottom: 3rem;
+            font-size: 2rem;
         }
 
         .values-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
         }
 
         .value-card {
             background: #fff;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            border: 1px solid #eee;
         }
 
         .value-card i {
-            font-size: 2.5rem;
+            font-size: 3rem;
             color: #e74c3c;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         .value-card h3 {
             color: #2c3e50;
             margin-bottom: 1rem;
+            font-size: 1.5rem;
         }
 
         .value-card p {
             color: #666;
             line-height: 1.6;
+            font-size: 1.1rem;
         }
 
         @media (max-width: 768px) {
-            .about-content {
-                grid-template-columns: 1fr;
+            .about-header {
+                padding: 4rem 1.5rem;
             }
-
-            .about-image {
-                order: -1;
+            
+            .about-header h1 {
+                font-size: 2.5rem;
             }
         }
     </style>
@@ -208,13 +169,15 @@
     <header>
         <nav class="navbar">
             <div class="logo">
-                <h1>SHOES STORE</h1>
+                <a href="index.html">SHOES STORE</a>
             </div>
             <ul class="nav-links">
                 <li><a href="index.html">Trang chủ</a></li>
                 <li><a href="products.html">Sản phẩm</a></li>
                 <li><a href="about.html" class="active">Giới thiệu</a></li>
                 <li><a href="contact.html">Liên hệ</a></li>
+                <li><a href="exercise.html">Lab Thực Hành</a></li>
+
             </ul>
             <div class="nav-icons">
                 <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
@@ -231,14 +194,11 @@
         </div>
 
         <div class="about-content">
-            <div class="about-image">
-                <img src="images/store.jpg" alt="Cửa hàng SHOES STORE">
-            </div>
             <div class="about-text">
                 <h2>Câu chuyện của chúng tôi</h2>
                 <p>SHOES STORE được thành lập vào năm 2020 với tình yêu và đam mê dành cho giày dép. Chúng tôi bắt đầu từ một cửa hàng nhỏ và dần phát triển thành một thương hiệu được yêu thích.</p>
-                <p>Với hơn 3 năm kinh nghiệm trong ngành, chúng tôi tự hào mang đến cho khách hàng những sản phẩm chất lượng cao, thiết kế độc đáo và giá cả phải chăng.</p>
-                <p>Chúng tôi luôn cập nhật xu hướng thời trang mới nhất và làm việc với các thương hiệu nổi tiếng để mang đến cho khách hàng những lựa chọn tốt nhất.</p>
+                <p>Với hơn 3 năm kinh nghiệm trong ngành, chúng tôi tự hào mang đến cho khách hàng những sản phẩm chất lượng cao, thiết kế độc đáo và giá cả phải chăng. Chúng tôi luôn cập nhật xu hướng thời trang mới nhất và làm việc với các thương hiệu nổi tiếng để mang đến cho khách hàng những lựa chọn tốt nhất.</p>
+                <p>Đội ngũ của chúng tôi bao gồm những chuyên gia giàu kinh nghiệm trong lĩnh vực thời trang và giày dép. Chúng tôi luôn nỗ lực để mang đến trải nghiệm mua sắm tốt nhất cho khách hàng, từ việc tư vấn chọn lựa sản phẩm phù hợp đến dịch vụ hậu mãi chu đáo.</p>
             </div>
         </div>
 
@@ -246,64 +206,22 @@
             <div class="feature-card">
                 <i class="fas fa-shipping-fast"></i>
                 <h3>Giao hàng nhanh chóng</h3>
-                <p>Giao hàng toàn quốc trong vòng 24-48 giờ</p>
+                <p>Giao hàng toàn quốc trong vòng 24-48 giờ với dịch vụ đóng gói cẩn thận và an toàn</p>
             </div>
             <div class="feature-card">
                 <i class="fas fa-undo"></i>
                 <h3>Đổi trả dễ dàng</h3>
-                <p>Chính sách đổi trả trong vòng 30 ngày</p>
+                <p>Chính sách đổi trả trong vòng 30 ngày với quy trình đơn giản và nhanh chóng</p>
             </div>
             <div class="feature-card">
                 <i class="fas fa-headset"></i>
                 <h3>Hỗ trợ 24/7</h3>
-                <p>Đội ngũ tư vấn nhiệt tình, chuyên nghiệp</p>
+                <p>Đội ngũ tư vấn nhiệt tình, chuyên nghiệp luôn sẵn sàng hỗ trợ khách hàng</p>
             </div>
             <div class="feature-card">
                 <i class="fas fa-shield-alt"></i>
                 <h3>Bảo hành chính hãng</h3>
-                <p>Cam kết sản phẩm chính hãng 100%</p>
-            </div>
-        </div>
-
-        <div class="team-section">
-            <h2>Đội ngũ của chúng tôi</h2>
-            <div class="team-grid">
-                <div class="team-member">
-                    <img src="images/team1.jpg" alt="Nguyễn Văn A">
-                    <div class="member-info">
-                        <h3>Nguyễn Văn A</h3>
-                        <p>Giám đốc điều hành</p>
-                        <div class="member-social">
-                            <a href="#"><i class="fab fa-facebook"></i></a>
-                            <a href="#"><i class="fab fa-linkedin"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="team-member">
-                    <img src="images/team2.jpg" alt="Trần Thị B">
-                    <div class="member-info">
-                        <h3>Trần Thị B</h3>
-                        <p>Quản lý sản phẩm</p>
-                        <div class="member-social">
-                            <a href="#"><i class="fab fa-facebook"></i></a>
-                            <a href="#"><i class="fab fa-linkedin"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="team-member">
-                    <img src="images/team3.jpg" alt="Lê Văn C">
-                    <div class="member-info">
-                        <h3>Lê Văn C</h3>
-                        <p>Chuyên gia tư vấn</p>
-                        <div class="member-social">
-                            <a href="#"><i class="fab fa-facebook"></i></a>
-                            <a href="#"><i class="fab fa-linkedin"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                        </div>
-                    </div>
-                </div>
+                <p>Cam kết sản phẩm chính hãng 100% với chính sách bảo hành uy tín</p>
             </div>
         </div>
 
@@ -313,22 +231,22 @@
                 <div class="value-card">
                     <i class="fas fa-heart"></i>
                     <h3>Đam mê</h3>
-                    <p>Chúng tôi làm việc với tình yêu và đam mê dành cho giày dép</p>
+                    <p>Chúng tôi làm việc với tình yêu và đam mê dành cho giày dép, luôn tìm kiếm những sản phẩm tốt nhất cho khách hàng</p>
                 </div>
                 <div class="value-card">
                     <i class="fas fa-star"></i>
                     <h3>Chất lượng</h3>
-                    <p>Cam kết mang đến những sản phẩm chất lượng cao nhất</p>
+                    <p>Cam kết mang đến những sản phẩm chất lượng cao nhất, đảm bảo sự hài lòng của khách hàng</p>
                 </div>
                 <div class="value-card">
                     <i class="fas fa-handshake"></i>
                     <h3>Tin cậy</h3>
-                    <p>Xây dựng mối quan hệ tin cậy với khách hàng</p>
+                    <p>Xây dựng mối quan hệ tin cậy với khách hàng thông qua sự minh bạch và trách nhiệm</p>
                 </div>
                 <div class="value-card">
                     <i class="fas fa-lightbulb"></i>
                     <h3>Đổi mới</h3>
-                    <p>Luôn cập nhật và đổi mới để phục vụ khách hàng tốt nhất</p>
+                    <p>Luôn cập nhật và đổi mới để phục vụ khách hàng tốt nhất, mang đến trải nghiệm mua sắm hiện đại</p>
                 </div>
             </div>
         </div>
@@ -351,9 +269,9 @@
             </div>
             <div class="footer-section">
                 <h3>Liên hệ</h3>
-                <p>Email: info@shoesstore.com</p>
-                <p>Điện thoại: 0123 456 789</p>
-                <p>Địa chỉ: 123 Đường ABC, Quận XYZ, TP.HCM</p>
+                <p>Email: contact@stu.edu.vn</p>
+                <p>Điện thoại: 028 3850 5520</p>
+                <p>Địa chỉ: 180 Cao Lỗ, Phường 4, Quận 8, Hồ Chí Minh</p>
             </div>
             <div class="footer-section">
                 <h3>Theo dõi chúng tôi</h3>

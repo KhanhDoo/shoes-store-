@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+         .logo a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
         .products-container {
             padding: 120px 5% 5rem;
             display: grid;
@@ -102,8 +108,178 @@
 
             .filter-toggle {
                 display: block;
-                margin-bottom: 1rem;
+                margin-bottom: 2rem;
             }
+        }
+
+        .drawer-overlay {
+            position: fixed;
+            top: 0; right: 0; bottom: 0; left: 0;
+            background: rgba(0,0,0,0.3);
+            z-index: 2000;
+            display: flex;
+            justify-content: flex-end;
+        }
+        .drawer {
+            background: #fff;
+            width: 400px;
+            max-width: 100vw;
+            height: 100vh;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+            padding: 2rem 1.5rem;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .drawer-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+        .drawer-product-info {
+            text-align: center;
+        }
+        .drawer-product-info img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            margin-bottom: 1rem;
+        }
+        .drawer-section label {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        .drawer-quantity {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .drawer-quantity button {
+            width: 32px;
+            height: 32px;
+            border: 1px solid #ddd;
+            background: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        .drawer-quantity input {
+            width: 50px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 0.3rem;
+        }
+        .drawer-size-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        .drawer-size-btn {
+            padding: 0.7rem 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: #f9f9f9;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.2s, border 0.2s;
+        }
+        .drawer-size-btn.selected {
+            background: #e74c3c;
+            color: #fff;
+            border-color: #e74c3c;
+        }
+        .drawer-size-btn:disabled {
+            background: #eee;
+            color: #aaa;
+            cursor: not-allowed;
+            border-color: #eee;
+        }
+        .drawer-add-to-cart {
+            width: 100%;
+            padding: 1rem;
+            background: #e74c3c;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: background 0.2s;
+        }
+        .drawer-add-to-cart:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        @media (max-width: 600px) {
+            .drawer {
+                width: 100vw;
+                padding: 1rem 0.5rem;
+            }
+        }
+        .labs-section {
+            padding: 40px 0;
+            background: #fff;
+            text-align: center;
+        }
+        .labs-section h2 {
+            margin-bottom: 30px;
+            color: #222;
+            font-size: 2rem;
+        }
+        .labs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .lab-card {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 24px 16px 16px 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .lab-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #222;
+            text-align: left;
+        }
+        .lab-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 16px 0;
+            text-align: left;
+        }
+        .lab-card ul li {
+            color: #555;
+            margin-bottom: 4px;
+        }
+        .btn-detail {
+            margin-top: auto;
+            display: inline-block;
+            background: #23b04a;
+            color: #fff;
+            padding: 10px 32px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+        .btn-detail:hover {
+            background: #188c36;
         }
     </style>
 </head>
@@ -112,13 +288,15 @@
     <header>
         <nav class="navbar">
             <div class="logo">
-                <h1>SHOES STORE</h1>
+                <a href="index.html">SHOES STORE</a>
             </div>
             <ul class="nav-links">
                 <li><a href="index.html">Trang chủ</a></li>
                 <li><a href="products.html" class="active">Sản phẩm</a></li>
                 <li><a href="about.html">Giới thiệu</a></li>
                 <li><a href="contact.html">Liên hệ</a></li>
+                <li><a href="exercise.html">Lab Thực Hành</a></li>
+
             </ul>
             <div class="nav-icons">
                 <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
@@ -131,24 +309,23 @@
     <main class="products-container">
         <!-- Filters -->
         <aside class="filters">
-            <button class="filter-toggle">Đóng</button>
             <div class="filter-section">
                 <h3>Danh mục</h3>
                 <div class="filter-options">
                     <label>
-                        <input type="checkbox" name="category" value="basketball">
+                        <input type="radio" name="category" value="basketball">
                         Giày bóng rổ 
                     </label>
                     <label>
-                        <input type="checkbox" name="category" value="casual">
+                        <input type="radio" name="category" value="casual">
                         Giày casual
                     </label>
                     <label>
-                        <input type="checkbox" name="category" value="soccer">
+                        <input type="radio" name="category" value="football">
                         Giày bóng đá
                     </label>
                     <label>
-                        <input type="checkbox" name="category" value="running">
+                        <input type="radio" name="category" value="running">
                         Giày chạy bộ 
                     </label>
                 </div>
@@ -165,61 +342,56 @@
 
             <div class="filter-section">
                 <h3>Kích thước</h3>
-                <div class="filter-options">
-                    <label>
-                        <input type="checkbox" name="size" value="36">
-                        36
-                    </label>
-                    <label>
-                        <input type="checkbox" name="size" value="37">
-                        37
-                    </label>
-                    <label>
-                        <input type="checkbox" name="size" value="38">
-                        38
-                    </label>
-                    <label>
-                        <input type="checkbox" name="size" value="39">
-                        39
-                    </label>
-                    <label>
-                        <input type="checkbox" name="size" value="40">
-                        40
-                    </label>
+                <div class="filter-options size-filter">
+                    <div class="size-column">
+                        <label>
+                            <input type="checkbox" name="size" value="36">
+                            36
+                        </label>
+                        <label>
+                            <input type="checkbox" name="size" value="37">
+                            37
+                        </label>
+                        <label>
+                            <input type="checkbox" name="size" value="38">
+                            38
+                        </label>
+                        <label>
+                            <input type="checkbox" name="size" value="39">
+                            39
+                        </label>
+                        <label>
+                            <input type="checkbox" name="size" value="40">
+                            40
+                        </label>
+                        <label>
+                            <input type="checkbox" name="size" value="41">
+                            41
+                        </label>
+                        <label>
+                            <input type="checkbox" name="size" value="42">
+                            42
+                        </label>
+                        <label>
+                            <input type="checkbox" name="size" value="43">
+                            43
+                        </label>
+                        <label>
+                            <input type="checkbox" name="size" value="44">
+                            44
+                        </label>
+                    </div>
                 </div>
             </div>
 
-            <div class="filter-section">
-                <h3>Màu sắc</h3>
-                <div class="filter-options">
-                    <label>
-                        <input type="checkbox" name="color" value="black">
-                        Đen
-                    </label>
-                    <label>
-                        <input type="checkbox" name="color" value="white">
-                        Trắng
-                    </label>
-                    <label>
-                        <input type="checkbox" name="color" value="red">
-                        Đỏ
-                    </label>
-                    <label>
-                        <input type="checkbox" name="color" value="blue">
-                        Xanh dương
-                    </label>
-                </div>
-            </div>
+            <button class="filter-toggle" id="reset-filters">Reset Filters</button>
         </aside>
 
         <!-- Products Grid -->
         <div class="products-content">
             <div class="sort-bar">
-                <button class="filter-toggle-mobile">Bộ lọc</button>
                 <div class="sort-options">
                     <select>
-                        <option value="popular">Phổ biến nhất</option>
-                        <option value="newest">Mới nhất</option>
                         <option value="price-asc">Giá tăng dần</option>
                         <option value="price-desc">Giá giảm dần</option>
                     </select>
@@ -227,106 +399,36 @@
             </div>
 
             <div class="products-grid">
-                <!-- Product Card 1 -->
-                <div class="product-card">
-                    <img src="images/basketball/2.jpg" alt="Giày thể thao">
-                    <h3>Giày Nike Air Jordan 5 SP x Off-White</h3>
-                    <p class="price">2.500.000đ</p>
-                    <button class="add-to-cart">Thêm vào giỏ</button>
-                </div>
-
-                <!-- Product Card 2 -->
-                <div class="product-card">
-                    <img src="images/casual/2.jpg" alt="Giày cao gót">
-                    <h3>Giày Smash v2 L Perf Trainers</h3>
-                    <p class="price">3.800.000đ</p>
-                    <button class="add-to-cart">Thêm vào giỏ</button>
-                </div>
-
-                <!-- Product Card 3 -->
-                <div class="product-card">
-                    <img src="images/football/2.jpg" alt="Giày sneaker">
-                    <h3>Sneaker Adidas</h3>
-                    <p class="price">2.200.000đ</p>
-                    <button class="add-to-cart">Thêm vào giỏ</button>
-                </div>
-                
-                <!-- Product Card 4 -->
-                <div class="product-card">
-                    <img src="images/running/2.jpg" alt="Giày sneaker">
-                    <h3>Sneaker Adidas</h3>
-                    <p class="price">2.200.000đ</p>
-                    <button class="add-to-cart">Thêm vào giỏ</button>
-                </div>
-
-                <!-- Product Card 5 -->
-                <div class="product-card">
-                    <img src="images/basketball/3.jpg" alt="Giày thể thao">
-                    <h3>Giày Nike Air Jordan 5 SP x Off-White</h3>
-                    <p class="price">2.500.000đ</p>
-                    <button class="add-to-cart">Thêm vào giỏ</button>
-                </div>
-                
-                <!-- Product Card 6 -->
-                <div class="product-card">
-                    <img src="images/casual/3.jpg" alt="Giày cao gót">
-                    <h3>Giày Smash v2 L Perf Trainers</h3>
-                    <p class="price">3.800.000đ</p>
-                    <button class="add-to-cart">Thêm vào giỏ</button>
-                </div>
-                
-                <!-- Product Card 7 -->
-                <div class="product-card">
-                    <img src="images/football/3.jpg" alt="Giày sneaker">
-                    <h3>Sneaker Adidas</h3>
-                    <p class="price">2.200.000đ</p>
-                    <button class="add-to-cart">Thêm vào giỏ</button>
-                </div>
-                
-                <!-- Product Card 8 -->
-                <div class="product-card">
-                    <img src="images/running/3.jpg" alt="Giày sneaker">
-                    <h3>Sneaker Adidas</h3>
-                    <p class="price">2.200.000đ</p>
-                    <button class="add-to-cart">Thêm vào giỏ</button>
-                </div>
-
-                <!-- Product Card 9 -->
-                <div class="product-card">
-                    <img src="images/basketball/4.jpg" alt="Giày thể thao">
-                    <h3>Giày Nike Air Jordan 5 SP x Off-White</h3>
-                    <p class="price">2.500.000đ</p>
-                    <button class="add-to-cart">Thêm vào giỏ</button>
-                </div>
-                
-                <!-- Product Card 10 -->
-                <div class="product-card">
-                    <img src="images/casual/4.jpg" alt="Giày cao gót">
-                    <h3>Giày Smash v2 L Perf Trainers</h3>
-                    <p class="price">3.800.000đ</p>
-                    <button class="add-to-cart">Thêm vào giỏ</button>
-                </div>
-                
-                <!-- Product Card 11 -->
-                <div class="product-card">
-                    <img src="images/football/4.jpg" alt="Giày sneaker">
-                    <h3>Sneaker Adidas</h3>
-                    <p class="price">2.200.000đ</p>
-                    <button class="add-to-cart">Thêm vào giỏ</button>
-                </div>
-                
-                <!-- Product Card 12 -->
-                <div class="product-card">
-                    <img src="images/running/4.jpg" alt="Giày sneaker">
-                    <h3>Sneaker Adidas</h3>
-                    <p class="price">2.200.000đ</p>
-                    <button class="add-to-cart">Thêm vào giỏ</button>
-                </div>
-
-                <!-- Add more product cards as needed -->
+                <!-- Products will be dynamically loaded here -->
             </div>
         </div>
     </main>
+
+    <!-- Product Drawer (hidden by default) -->
+    <div id="product-drawer" class="drawer-overlay" style="display:none;">
+        <div class="drawer">
+            <button class="drawer-close">&times;</button>
+            <div class="drawer-product-info">
+                <img id="drawer-product-image" src="" alt="">
+                <h2 id="drawer-product-name"></h2>
+                <div id="drawer-product-price"></div>
+            </div>
+            <div class="drawer-section">
+                <label>Số lượng</label>
+                <div class="drawer-quantity">
+                    <button id="drawer-qty-minus">-</button>
+                    <input id="drawer-qty-input" type="number" min="1" max="10" value="1">
+                    <button id="drawer-qty-plus">+</button>
+                </div>
+            </div>
+            <div class="drawer-section">
+                <label>Kích cỡ</label>
+                <div id="drawer-size-grid" class="drawer-size-grid"></div>
+            </div>
+            <button id="drawer-add-to-cart" class="drawer-add-to-cart" disabled>Thêm vào giỏ</button>
+        </div>
+    </div>
+    <!-- End Product Drawer -->
 
     <!-- Footer -->
     <footer>
@@ -345,9 +447,9 @@
             </div>
             <div class="footer-section">
                 <h3>Liên hệ</h3>
-                <p>Email: info@shoesstore.com</p>
-                <p>Điện thoại: 0123 456 789</p>
-                <p>Địa chỉ: 123 Đường ABC, Quận XYZ, TP.HCM</p>
+                <p>Email: contact@stu.edu.vn</p>
+                <p>Điện thoại: 028 3850 5520</p>
+                <p>Địa chỉ: 180 Cao Lỗ, Phường 4, Quận 8, Hồ Chí Minh</p>
             </div>
             <div class="footer-section">
                 <h3>Theo dõi chúng tôi</h3>
@@ -361,40 +463,8 @@
         <div class="footer-bottom">
             <p>&copy; 2024 SHOES STORE. All rights reserved.</p>
         </div>
-    </footer>
+    </footer>       
 
     <script src="js/main.js"></script>
-    <script>
-        // Filter toggle for mobile
-        const filterToggle = document.querySelector('.filter-toggle-mobile');
-        const filters = document.querySelector('.filters');
-        const closeFilter = document.querySelector('.filter-toggle');
-
-        filterToggle.addEventListener('click', () => {
-            filters.classList.add('active');
-        });
-
-        closeFilter.addEventListener('click', () => {
-            filters.classList.remove('active');
-        });
-
-        // Filter functionality
-        const filterInputs = document.querySelectorAll('.filter-options input');
-        filterInputs.forEach(input => {
-            input.addEventListener('change', applyFilters);
-        });
-
-        function applyFilters() {
-            // Implement filter logic here
-            console.log('Applying filters...');
-        }
-
-        // Sort functionality
-        const sortSelect = document.querySelector('.sort-options select');
-        sortSelect.addEventListener('change', (e) => {
-            // Implement sort logic here
-            console.log('Sorting by:', e.target.value);
-        });
-    </script>
 </body>
 </html> 

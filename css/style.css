@@ -317,4 +317,15 @@ footer {
     .category-grid {
         grid-template-columns: 1fr;
     }
+}
+
+.no-products {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 2rem;
+    font-size: 1.2rem;
+    color: #666;
+    background: #f9f9f9;
+    border-radius: 8px;
+    margin: 2rem 0;
 } 

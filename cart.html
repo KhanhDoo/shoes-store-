@@ -31,6 +31,7 @@
             align-items: center;
             padding: 1rem 0;
             border-bottom: 1px solid #eee;
+            position: relative;
         }
 
         .cart-item img {
@@ -47,6 +48,7 @@
 
         .item-details p {
             color: #666;
+            margin: 0.2rem 0;
         }
 
         .quantity-controls {
@@ -63,6 +65,9 @@
             border-radius: 5px;
             cursor: pointer;
             transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .quantity-controls button:hover {
@@ -84,6 +89,7 @@
             cursor: pointer;
             font-size: 1.2rem;
             transition: color 0.3s ease;
+            padding: 0.5rem;
         }
 
         .remove-item:hover {
@@ -116,6 +122,7 @@
             cursor: pointer;
             font-size: 1.1rem;
             transition: background-color 0.3s ease;
+            margin-top: 1rem;
         }
 
         .checkout-button:hover {
@@ -125,6 +132,7 @@
         .empty-cart {
             text-align: center;
             padding: 3rem;
+            display: none;
         }
 
         .empty-cart i {
@@ -194,6 +202,8 @@
                 <li><a href="products.html">Sản phẩm</a></li>
                 <li><a href="about.html">Giới thiệu</a></li>
                 <li><a href="contact.html">Liên hệ</a></li>
+                <li><a href="exercise.html">Lab Thực Hành</a></li>
+
             </ul>
             <div class="nav-icons">
                 <a href="cart.html" class="active"><i class="fas fa-shopping-cart"></i></a>
@@ -209,23 +219,11 @@
                 <h2>Giỏ hàng của bạn</h2>
                 <div id="cart-items-container">
                     <!-- Cart items will be dynamically added here -->
-                    <div class="cart-item">
-                        <img src="images/shoe1.jpg" alt="Giày thể thao">
-                        <div class="item-details">
-                            <h3>Giày thể thao Nike</h3>
-                            <p>Size: 40</p>
-                            <p>Màu: Đen</p>
-                        </div>
-                        <div class="quantity-controls">
-                            <button class="decrease">-</button>
-                            <input type="number" value="1" min="1" max="10">
-                            <button class="increase">+</button>
-                        </div>
-                        <div class="item-price">2.500.000đ</div>
-                        <button class="remove-item">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </div>
+                </div>
+                <div class="empty-cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <h2>Giỏ hàng của bạn đang trống</h2>
+                    <a href="products.html" class="continue-shopping">Tiếp tục mua sắm</a>
                 </div>
             </div>
 
@@ -233,7 +231,7 @@
                 <h2>Tổng đơn hàng</h2>
                 <div class="summary-item">
                     <span>Tạm tính:</span>
-                    <span>2.500.000đ</span>
+                    <span id="subtotal">0đ</span>
                 </div>
                 <div class="summary-item">
                     <span>Phí vận chuyển:</span>
@@ -241,7 +239,7 @@
                 </div>
                 <div class="summary-item">
                     <span>Tổng cộng:</span>
-                    <span class="total">2.530.000đ</span>
+                    <span id="total" class="total">0đ</span>
                 </div>
                 <button class="checkout-button">Thanh toán</button>
             </div>
@@ -286,65 +284,124 @@
     <script src="js/main.js"></script>
     <script>
         // Cart functionality
-        const cartItemsContainer = document.getElementById('cart-items-container');
-        const quantityInputs = document.querySelectorAll('.quantity-controls input');
-        const decreaseButtons = document.querySelectorAll('.decrease');
-        const increaseButtons = document.querySelectorAll('.increase');
-        const removeButtons = document.querySelectorAll('.remove-item');
+        document.addEventListener('DOMContentLoaded', function() {
+            const cartItemsContainer = document.getElementById('cart-items-container');
+            const emptyCart = document.querySelector('.empty-cart');
+            const subtotalElement = document.getElementById('subtotal');
+            const totalElement = document.getElementById('total');
+            const shippingCost = 30000;
 
-        // Update quantity
-        function updateQuantity(input, change) {
-            const newValue = parseInt(input.value) + change;
-            if (newValue >= 1 && newValue <= 10) {
-                input.value = newValue;
-                updateCart();
+            function loadCart() {
+                const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                displayCart(cart);
+                updateTotals(cart);
             }
-        }
 
-        // Add event listeners for quantity controls
-        decreaseButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const input = button.nextElementSibling;
-                updateQuantity(input, -1);
-            });
+            function displayCart(cart) {
+                if (cart.length === 0) {
+                    cartItemsContainer.style.display = 'none';
+                    emptyCart.style.display = 'block';
+                    return;
+                }
+
+                cartItemsContainer.style.display = 'block';
+                emptyCart.style.display = 'none';
+                cartItemsContainer.innerHTML = '';
+
+                cart.forEach((item, index) => {
+                    const cartItem = document.createElement('div');
+                    cartItem.className = 'cart-item';
+                    cartItem.innerHTML = `
+                        <img src="${item.image}" alt="${item.name}">
+                        <div class="item-details">
+                            <h3>${item.name}</h3>
+                            <p>Size: ${item.size || 'N/A'}</p>
+                        </div>
+                        <div class="quantity-controls">
+                            <button class="decrease" data-index="${index}">-</button>
+                            <input type="number" value="${item.quantity}" min="1" max="10" data-index="${index}">
+                            <button class="increase" data-index="${index}">+</button>
+                        </div>
+                        <div class="item-price">${(item.price * item.quantity).toLocaleString('vi-VN')}đ</div>
+                        <button class="remove-item" data-index="${index}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    `;
+                    cartItemsContainer.appendChild(cartItem);
+                });
+
+                attachEventListeners();
+            }
+
+            function attachEventListeners() {
+                // Xử lý nút giảm số lượng
+                document.querySelectorAll('.decrease').forEach(button => {
+                    button.addEventListener('click', () => {
+                        const index = button.dataset.index; // Lấy chỉ số của sản phẩm trong giỏ hàng
+                        updateQuantity(index, -1); // Giảm số lượng đi 1
+                    });
+                });
+
+                // Xử lý nút tăng số lượng
+                document.querySelectorAll('.increase').forEach(button => {
+                    button.addEventListener('click', () => {
+                        const index = button.dataset.index; // Lấy chỉ số của sản phẩm trong giỏ hàng
+                        updateQuantity(index, 1); // Tăng số lượng lên 1
+                    });
+                });
+
+                // Xử lý ô nhập số lượng trực tiếp
+                document.querySelectorAll('.quantity-controls input').forEach(input => {
+                    input.addEventListener('change', () => {
+                        const index = input.dataset.index; // Lấy chỉ số của sản phẩm trong giỏ hàng
+                        const newValue = parseInt(input.value); // Chuyển giá trị nhập thành số
+                        if (newValue >= 1 && newValue <= 10) { // Kiểm tra giá trị hợp lệ (từ 1-10)
+                            updateQuantity(index, 0, newValue); // Cập nhật số lượng mới
+                        } else {
+                            input.value = 1; // Nếu không hợp lệ, đặt lại về 1
+                            updateQuantity(index, 0, 1); // Cập nhật số lượng về 1
+                        }
+                    });
+                });
+
+                // Remove items
+                document.querySelectorAll('.remove-item').forEach(button => {
+                    button.addEventListener('click', () => {
+                        const index = button.dataset.index;
+                        removeItem(index);
+                    });
+                });
+            }
+
+            function updateQuantity(index, change, newValue = null) {
+                const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                if (newValue !== null) {
+                    cart[index].quantity = newValue;
+                } else {
+                    cart[index].quantity = Math.max(1, Math.min(10, cart[index].quantity + change));
+                }
+                localStorage.setItem('cart', JSON.stringify(cart));
+                loadCart();
+            }
+
+            function removeItem(index) {
+                const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                cart.splice(index, 1);
+                localStorage.setItem('cart', JSON.stringify(cart));
+                loadCart();
+            }
+
+            function updateTotals(cart) {
+                const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                const total = subtotal + shippingCost;
+
+                subtotalElement.textContent = `${subtotal.toLocaleString('vi-VN')}đ`;
+                totalElement.textContent = `${total.toLocaleString('vi-VN')}đ`;
+            }
+
+            // Initialize cart
+            loadCart();
         });
-
-        increaseButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const input = button.previousElementSibling;
-                updateQuantity(input, 1);
-            });
-        });
-
-        // Remove item
-        removeButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const cartItem = button.closest('.cart-item');
-                cartItem.remove();
-                updateCart();
-            });
-        });
-
-        // Update cart totals
-        function updateCart() {
-            let subtotal = 0;
-            const items = document.querySelectorAll('.cart-item');
-            
-            items.forEach(item => {
-                const price = parseInt(item.querySelector('.item-price').textContent.replace(/[^\d]/g, ''));
-                const quantity = parseInt(item.querySelector('.quantity-controls input').value);
-                subtotal += price * quantity;
-            });
-
-            const shipping = 30000;
-            const total = subtotal + shipping;
-
-            document.querySelector('.summary-item:nth-child(1) span:last-child').textContent = `${subtotal.toLocaleString()}đ`;
-            document.querySelector('.total').textContent = `${total.toLocaleString()}đ`;
-        }
-
-        // Initialize cart
-        updateCart();
     </script>
 </body>
 </html> 

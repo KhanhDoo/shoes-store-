@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giới thiệu - SHOES STORE</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .labs-section {
+            padding: 40px 0;
+            background: #fff;
+            text-align: center;
+        }
+        .labs-section h2 {
+            margin-bottom: 30px;
+            color: #222;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        .labs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .lab-card {
+            background: #fff;
+            border: 1.5px solid #e0e0e0;
+            border-radius: 14px;
+            padding: 24px 18px 18px 18px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            transition: box-shadow 0.2s;
+        }
+        .lab-card:hover {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.13);
+        }
+        .lab-card h3 {
+            font-size: 1.18rem;
+            margin-bottom: 12px;
+            color: #222;
+            text-align: left;
+            font-weight: 600;
+        }
+        .lab-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 18px 0;
+            text-align: left;
+        }
+        .lab-card ul li {
+            color: #555;
+            margin-bottom: 4px;
+            font-size: 1rem;
+        }
+        .btn-detail {
+            margin-top: auto;
+            display: block;
+            background: #2c3e50;
+            color: #fff;
+            padding: 10px 0;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            text-align: center;
+            font-size: 1rem;
+            transition: background 0.2s;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            box-shadow: 0 1px 4px rgba(35,176,74,0.08);
+        }
+        .btn-detail:hover {
+            background: #188c36;
+        }
+        .logo a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        @media (max-width: 600px) {
+            .labs-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">SHOES STORE</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Trang chủ</a></li>
+                <li><a href="products.html">Sản phẩm</a></li>
+                <li><a href="about.html">Giới thiệu</a></li>
+                <li><a href="contact.html">Liên hệ</a></li>
+                <li><a href="exercise.html" class="active">Lab Thực Hành</a></li>
+
+            </ul>
+            <div class="nav-icons">
+                <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+                <a href="login.html"><i class="fas fa-user"></i></a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="labs-section">
+            <h2>LAB THỰC HÀNH</h2>
+            <div class="labs-grid">
+                <div class="lab-card">
+                    <h3>Lab01: HTML</h3>
+                    <a href="#" class="btn-detail">Xem chi tiết</a>
+                </div>
+                <div class="lab-card">
+                    <h3>Lab02: Table & List</h3>
+                    
+                    <a href="https://drive.google.com/drive/folders/1Ao-JN3MPhwzbNIUVI9EmitkBw81HjJlR?usp=sharing" class="btn-detail">Xem chi tiết</a>
+                </div>
+                <div class="lab-card">
+                    <h3>Lab03: Frame & Form</h3>
+                    
+                    <a href="https://drive.google.com/drive/folders/1WNUoBf6MrVBp9GLfrY3LsKiev6IFzNPV?usp=sharing" class="btn-detail">Xem chi tiết</a>
+                </div>
+                <div class="lab-card">
+                    <h3>Lab04: CSS cơ bản</h3>
+                    
+                    <a href="https://drive.google.com/drive/folders/1BxzvKvRWc0NHjq5SzCK0nBxGKfman-R9?usp=sharing" class="btn-detail">Xem chi tiết</a>
+                </div>
+                <div class="lab-card">
+                    <h3>Lab05: Các thuộc tính CSS</h3>
+                    
+                    <a href="https://drive.google.com/drive/folders/1TBskshXMKqsgfCqD5Ma3yjR8C5z8fbje?usp=sharing" class="btn-detail">Xem chi tiết</a>
+                </div>
+                <div class="lab-card">
+                    <h3>Lab06: Xây dựng layout responsive bằng CSS</h3>
+                    
+                    <a href="https://drive.google.com/drive/folders/1L49lXQW1J86GlBZlNVhJu4XvgVpSH95q?usp=sharing" class="btn-detail">Xem chi tiết</a>
+                </div>
+                <div class="lab-card">
+                    <h3>Lab07: Javascript</h3>
+                    <a href="https://drive.google.com/drive/folders/1c1pnvgypSL42oM_q_HzQb2y1U8zf_ylR?usp=sharing" class="btn-detail">Xem chi tiết</a>
+                </div>
+                <div class="lab-card">
+                    <h3>Lab08: Javascript nâng cao</h3>
+                    <ul>
+                        <li>Lab8_1</li>
+                        <li>Lab8_2</li>
+                        <li>Lab8_3</li>
+                    </ul>
+                    <a href="#" class="btn-detail">Xem chi tiết</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Về chúng tôi</h3>
+                <p>SHOES STORE - Nơi mang đến cho bạn những đôi giày chất lượng và thời trang nhất.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Liên kết nhanh</h3>
+                <ul>
+                    <li><a href="about.html">Giới thiệu</a></li>
+                    <li><a href="products.html">Sản phẩm</a></li>
+                    <li><a href="contact.html">Liên hệ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Liên hệ</h3>
+                <p>Email: contact@stu.edu.vn</p>
+                <p>Điện thoại: 028 3850 5520</p>
+                <p>Địa chỉ: 180 Cao Lỗ, Phường 4, Quận 8, Hồ Chí Minh</p>
+            </div>
+            <div class="footer-section">
+                <h3>Theo dõi chúng tôi</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 SHOES STORE. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

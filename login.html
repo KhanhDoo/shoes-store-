@@ -350,25 +350,202 @@
         const loginForm = document.getElementById('login-form');
         const registerForm = document.getElementById('register-form');
 
+        // Hàm kiểm tra email hợp lệ
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        // Hàm kiểm tra mật khẩu mạnh
+        function isStrongPassword(password) {
+            return password.length >= 8 && 
+                   /[A-Z]/.test(password) && 
+                   /[a-z]/.test(password) && 
+                   /[0-9]/.test(password);
+        }
+
+        // Hàm hiển thị thông báo lỗi
+        function showError(element, message) {
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            errorDiv.style.color = 'red';
+            errorDiv.style.fontSize = '0.8rem';
+            errorDiv.style.marginTop = '0.3rem';
+            errorDiv.textContent = message;
+            
+            // Xóa thông báo lỗi cũ nếu có
+            const existingError = element.parentElement.querySelector('.error-message');
+            if (existingError) {
+                existingError.remove();
+            }
+            
+            element.parentElement.appendChild(errorDiv);
+        }
+
+        // Xử lý đăng nhập
         loginForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            // Implement login logic here
-            console.log('Login form submitted');
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            const remember = document.getElementById('remember').checked;
+
+            // Kiểm tra email
+            if (!isValidEmail(email)) {
+                showError(document.getElementById('login-email'), 'Email không hợp lệ');
+                return;
+            }
+
+            // Kiểm tra mật khẩu
+            if (password.length < 6) {
+                showError(document.getElementById('login-password'), 'Mật khẩu phải có ít nhất 6 ký tự');
+                return;
+            }
+
+            // Gửi request đăng nhập
+            fetch('/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, password, remember })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Lưu token vào localStorage nếu chọn "Ghi nhớ đăng nhập"
+                    if (remember) {
+                        localStorage.setItem('authToken', data.token);
+                    } else {
+                        sessionStorage.setItem('authToken', data.token);
+                    }
+                    // Chuyển hướng đến trang chủ
+                    window.location.href = 'index.html';
+                } else {
+                    showError(document.getElementById('login-email'), data.message || 'Đăng nhập thất bại');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showError(document.getElementById('login-email'), 'Có lỗi xảy ra, vui lòng thử lại sau');
+            });
         });
 
+        // Xử lý đăng ký
         registerForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            // Implement registration logic here
-            console.log('Register form submitted');
+            const name = document.getElementById('register-name').value;
+            const email = document.getElementById('register-email').value;
+            const password = document.getElementById('register-password').value;
+            const confirmPassword = document.getElementById('register-confirm-password').value;
+
+            // Kiểm tra tên
+            if (name.length < 2) {
+                showError(document.getElementById('register-name'), 'Tên phải có ít nhất 2 ký tự');
+                return;
+            }
+
+            // Kiểm tra email
+            if (!isValidEmail(email)) {
+                showError(document.getElementById('register-email'), 'Email không hợp lệ');
+                return;
+            }
+
+            // Kiểm tra mật khẩu
+            if (!isStrongPassword(password)) {
+                showError(document.getElementById('register-password'), 
+                    'Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường và số');
+                return;
+            }
+
+            // Kiểm tra xác nhận mật khẩu
+            if (password !== confirmPassword) {
+                showError(document.getElementById('register-confirm-password'), 'Mật khẩu xác nhận không khớp');
+                return;
+            }
+
+            // Gửi request đăng ký
+            fetch('/api/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name, email, password })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Chuyển sang tab đăng nhập
+                    document.querySelector('[data-tab="login"]').click();
+                    // Hiển thị thông báo thành công
+                    alert('Đăng ký thành công! Vui lòng đăng nhập.');
+                } else {
+                    showError(document.getElementById('register-email'), data.message || 'Đăng ký thất bại');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showError(document.getElementById('register-email'), 'Có lỗi xảy ra, vui lòng thử lại sau');
+            });
         });
 
-        // Social login buttons
+        // Xử lý đăng nhập bằng mạng xã hội
         const socialButtons = document.querySelectorAll('.social-button');
         socialButtons.forEach(button => {
             button.addEventListener('click', () => {
-                // Implement social login logic here
-                console.log('Social login clicked:', button.classList.contains('facebook') ? 'Facebook' : 'Google');
+                const provider = button.classList.contains('facebook') ? 'facebook' : 'google';
+                
+                // Mở cửa sổ đăng nhập OAuth
+                const width = 600;
+                const height = 600;
+                const left = (window.innerWidth - width) / 2;
+                const top = (window.innerHeight - height) / 2;
+                
+                window.open(
+                    `/api/auth/${provider}`,
+                    'Social Login',
+                    `width=${width},height=${height},left=${left},top=${top}`
+                );
+
+                // Lắng nghe sự kiện đăng nhập thành công từ cửa sổ popup
+                window.addEventListener('message', (event) => {
+                    if (event.data.type === 'social-login-success') {
+                        // Lưu token
+                        localStorage.setItem('authToken', event.data.token);
+                        // Chuyển hướng đến trang chủ
+                        window.location.href = 'index.html';
+                    }
+                });
             });
+        });
+
+        // Xử lý quên mật khẩu
+        document.querySelector('.forgot-password a').addEventListener('click', (e) => {
+            e.preventDefault();
+            const email = prompt('Vui lòng nhập email của bạn:');
+            
+            if (email && isValidEmail(email)) {
+                fetch('/api/forgot-password', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Hướng dẫn đặt lại mật khẩu đã được gửi đến email của bạn.');
+                    } else {
+                        alert(data.message || 'Có lỗi xảy ra, vui lòng thử lại sau.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Có lỗi xảy ra, vui lòng thử lại sau.');
+                });
+            } else if (email) {
+                alert('Email không hợp lệ!');
+            }
         });
     </script>
 </body>
