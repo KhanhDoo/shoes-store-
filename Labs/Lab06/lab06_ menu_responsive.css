@@ -1,0 +1,32 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.menu{
+    background-color: black;
+    padding: 14px 16px;
+    flex-wrap: wrap;
+}
+
+.menu a{
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    text-align: center;
+}
+
+.menu a:hover{
+    background-color: aqua;
+}
+
+@media screen and (max-width: 600px) {
+    .menu a:not(:first-child) {display: none;}
+}
+
+@media screen and (max-width: 600px) {
+    .menu.reponsive{
+        position: relative;
+    }
+    
+}

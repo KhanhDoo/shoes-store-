@@ -23,43 +23,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Add to cart functionality
-    // const addToCartButtons = document.querySelectorAll('.add-to-cart');
-    // addToCartButtons.forEach(button => {
-    //     button.addEventListener('click', function() {
-    //         const product = this.parentElement;
-    //         const productName = product.querySelector('h3').textContent;
-    //         const productPriceText = product.querySelector('.price').textContent;
-    //         // Extract price as number
-    //         const productPrice = parseInt(productPriceText.replace(/[^\d]/g, ''));
-    //         // Try to get image, size if available
-    //         const productImage = product.querySelector('img')?.getAttribute('src') || '';
-    //         // For demo: you can extend this to get selected size from UI
-    //         const productSize = product.querySelector('.size')?.textContent || null;
-
-    //         // Load cart from localStorage
-    //         let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    //         // Check if product (same name, size) already in cart
-    //         const existingIndex = cart.findIndex(item => item.name === productName && item.size === productSize);
-    //         if (existingIndex !== -1) {
-    //             // Increase quantity
-    //             cart[existingIndex].quantity = (cart[existingIndex].quantity || 1) + 1;
-    //         } else {
-    //             // Add new item
-    //             cart.push({
-    //                 name: productName,
-    //                 price: productPrice,
-    //                 image: productImage,
-    //                 size: productSize,
-    //                 quantity: 1
-    //             });
-    //         }
-    //         localStorage.setItem('cart', JSON.stringify(cart));
-    //         updateCartCount();
-    //         showNotification(`${productName} đã được thêm vào giỏ hàng!`);
-    //     });
-    // });
-
     // Shopping cart functionality
     let cart = [];
 

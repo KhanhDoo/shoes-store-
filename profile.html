@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông tin cá nhân - SHOES STORE</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .logo a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        .profile-container {
+            padding: 120px 5% 5rem;
+            min-height: calc(100vh - 70px);
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .profile-box {
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #e74c3c, #c0392b);
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: #e74c3c;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 2.5rem;
+            font-weight: 500;
+        }
+
+        .profile-info h2 {
+            color: #2c3e50;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-info p {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .profile-section {
+            margin-bottom: 2rem;
+        }
+
+        .profile-section h3 {
+            color: #2c3e50;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #eee;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .info-item {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+        }
+
+        .info-item label {
+            display: block;
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .info-item span {
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .action-button {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .edit-button {
+            background: #2c3e50;
+            color: #fff;
+        }
+
+        .edit-button:hover {
+            background: #34495e;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .logout-button {
+            background: #e74c3c;
+            color: #fff;
+        }
+
+        .logout-button:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .profile-box {
+                margin: 0 1rem;
+                padding: 1.5rem;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .action-button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">SHOES STORE</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Trang chủ</a></li>
+                <li><a href="products.html">Sản phẩm</a></li>
+                <li><a href="about.html">Giới thiệu</a></li>
+                <li><a href="contact.html">Liên hệ</a></li>
+            </ul>
+            <div class="nav-icons">
+                <a href="cart.html" class="cart-count" data-count="0">
+                    <i class="fas fa-shopping-cart"></i>
+                </a>
+                <div class="user-info" style="display: none;">
+                    <span class="user-name"></span>
+                </div>
+                <a href="profile.html" class="login-link">
+                    <i class="fas fa-user"></i>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="profile-container">
+        <div class="profile-box">
+            <div class="profile-header">
+                <div class="profile-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="profile-info">
+                    <h2 id="user-name">Loading...</h2>
+                    <p id="user-email">Loading...</p>
+                </div>
+            </div>
+
+            <div class="profile-section">
+                <h3>Thông tin cá nhân</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <label>Họ và tên</label>
+                        <span id="full-name">Loading...</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Email</label>
+                        <span id="email">Loading...</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Ngày tham gia</label>
+                        <span id="join-date">Loading...</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-section">
+                <h3>Hoạt động gần đây</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <label>Số đơn hàng</label>
+                        <span>0</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Sản phẩm đã xem</label>
+                        <span>0</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Đánh giá</label>
+                        <span>0</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="action-button edit-button">
+                    <i class="fas fa-edit"></i> Chỉnh sửa thông tin
+                </button>
+                <button class="action-button logout-button">
+                    <i class="fas fa-sign-out-alt"></i> Đăng xuất
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Về chúng tôi</h3>
+                <p>SHOES STORE - Nơi mang đến cho bạn những đôi giày chất lượng và thời trang nhất.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Liên kết nhanh</h3>
+                <ul>
+                    <li><a href="about.html">Giới thiệu</a></li>
+                    <li><a href="products.html">Sản phẩm</a></li>
+                    <li><a href="contact.html">Liên hệ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Liên hệ</h3>
+                <p>Email: contact@stu.edu.vn</p>
+                <p>Điện thoại: 028 3850 5520</p>
+                <p>Địa chỉ: 180 Cao Lỗ, Phường 4, Quận 8, Hồ Chí Minh</p>
+            </div>
+            <div class="footer-section">
+                <h3>Theo dõi chúng tôi</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 SHOES STORE. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser')) || 
+                              JSON.parse(sessionStorage.getItem('currentUser'));
+            
+            if (currentUser) {
+                // Update user interface
+                document.getElementById('user-name').textContent = currentUser.name;
+                document.getElementById('user-email').textContent = currentUser.email;
+                document.getElementById('full-name').textContent = currentUser.name;
+                document.getElementById('email').textContent = currentUser.email;
+                document.getElementById('join-date').textContent = new Date(currentUser.id).toLocaleDateString('vi-VN');
+
+                // Get current cart and user's saved cart
+                const currentCart = JSON.parse(localStorage.getItem('cart')) || [];
+                const userCart = JSON.parse(localStorage.getItem(`cart_${currentUser.id}`)) || [];
+                
+                // KHÔNG ghi đè gì cả, chỉ lấy cart_{userId} để hiển thị số lượng
+                const count = userCart.reduce((sum, item) => sum + item.quantity, 0);
+                document.querySelector('.cart-count').setAttribute('data-count', count);
+
+                // Update user info in header
+                const userInfo = document.querySelector('.user-info');
+                const loginLink = document.querySelector('.login-link');
+                const userName = document.querySelector('.user-name');
+                
+                userInfo.style.display = 'flex';
+                loginLink.classList.add('hidden');
+                userName.textContent = `Xin chào, ${currentUser.name}`;
+
+                // Add event listener for page visibility change
+                document.addEventListener('visibilitychange', () => {
+                    if (document.visibilityState === 'visible') {
+                        // When page becomes visible, sync cart state
+                        const updatedCurrentCart = JSON.parse(localStorage.getItem('cart')) || [];
+                        const updatedUserCart = JSON.parse(localStorage.getItem(`cart_${currentUser.id}`)) || [];
+                        
+                        // Use the most recent cart state
+                        if (updatedCurrentCart.length > 0) {
+                            localStorage.setItem(`cart_${currentUser.id}`, JSON.stringify(updatedCurrentCart));
+                        } else if (updatedUserCart.length > 0) {
+                            localStorage.setItem('cart', JSON.stringify(updatedUserCart));
+                        }
+                        
+                        // Update cart count
+                        const newCount = updatedCurrentCart.reduce((sum, item) => sum + item.quantity, 0);
+                        document.querySelector('.cart-count').setAttribute('data-count', newCount);
+                    }
+                });
+            } else {
+                // Redirect to login if not logged in
+                window.location.href = 'login.html';
+            }
+
+            // Handle logout
+            const logoutButtons = document.querySelectorAll('.logout-button, .logout-btn');
+            logoutButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Save current cart to user's storage before logout
+                    const currentUser = JSON.parse(localStorage.getItem('currentUser')) || 
+                                     JSON.parse(sessionStorage.getItem('currentUser'));
+                    if (currentUser) {
+                        const currentCart = JSON.parse(localStorage.getItem('cart')) || [];
+                        localStorage.setItem(`cart_${currentUser.id}`, JSON.stringify(currentCart));
+                    }
+                    
+                    // Clear user session
+                    localStorage.removeItem('currentUser');
+                    sessionStorage.removeItem('currentUser');
+                    
+                    // Clear main cart
+                    localStorage.removeItem('cart');
+                    
+                    // Redirect to home page
+                    window.location.href = 'index.html';
+                });
+            });
+
+            // Handle edit button
+            const editButton = document.querySelector('.edit-button');
+            editButton.addEventListener('click', () => {
+                alert('Tính năng chỉnh sửa thông tin đang được phát triển!');
+            });
+        });
+    </script>
+</body>
+</html> 

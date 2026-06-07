@@ -9,86 +9,224 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         .labs-section {
-            padding: 40px 0;
-            background: #fff;
+            padding: 120px 20px 60px;
+            background: #f8f9fa;
             text-align: center;
+            min-height: calc(100vh - 70px);
         }
+
         .labs-section h2 {
-            margin-bottom: 30px;
-            color: #222;
-            font-size: 2rem;
+            margin-bottom: 40px;
+            color: #2c3e50;
+            font-size: 2.2rem;
             font-weight: 700;
             letter-spacing: 1px;
+            position: relative;
+            padding-bottom: 15px;
         }
+
+        .labs-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: #e74c3c;
+        }
+
         .labs-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0 20px;
         }
+
         .lab-card {
             background: #fff;
-            border: 1.5px solid #e0e0e0;
-            border-radius: 14px;
-            padding: 24px 18px 18px 18px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
             display: flex;
             flex-direction: column;
             align-items: stretch;
-            transition: box-shadow 0.2s;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            min-height: 200px;
         }
+
+        .lab-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: #e74c3c;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
         .lab-card:hover {
-            box-shadow: 0 4px 20px rgba(0,0,0,0.13);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
         }
+
+        .lab-card:hover::before {
+            transform: scaleX(1);
+        }
+
         .lab-card h3 {
-            font-size: 1.18rem;
-            margin-bottom: 12px;
-            color: #222;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
             text-align: left;
             font-weight: 600;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
         }
+
         .lab-card ul {
             list-style: none;
             padding: 0;
-            margin: 0 0 18px 0;
+            margin: 0 0 20px 0;
             text-align: left;
+            flex-grow: 1;
         }
+
+        .lab-card .card-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
         .lab-card ul li {
             color: #555;
-            margin-bottom: 4px;
+            margin-bottom: 8px;
             font-size: 1rem;
+            padding-left: 20px;
+            position: relative;
         }
+
+        .lab-card ul li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
         .btn-detail {
             margin-top: auto;
-            display: block;
+            display: inline-block;
             background: #2c3e50;
             color: #fff;
-            padding: 10px 0;
+            padding: 12px 25px;
             border-radius: 6px;
             text-decoration: none;
             font-weight: 500;
             text-align: center;
             font-size: 1rem;
-            transition: background 0.2s;
+            transition: all 0.3s ease;
             border: none;
             outline: none;
             cursor: pointer;
-            box-shadow: 0 1px 4px rgba(35,176,74,0.08);
+            width: 100%;
         }
+
         .btn-detail:hover {
-            background: #188c36;
+            background: #e74c3c;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.2);
         }
+
         .logo a {
             text-decoration: none;
             color: #2c3e50;
             font-size: 1.8rem;
             font-weight: 700;
         }
-        @media (max-width: 600px) {
+
+        @media (max-width: 768px) {
+            .labs-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+                padding: 0 15px;
+            }
+
+            .labs-section {
+                padding: 40px 15px;
+            }
+
+            .labs-section h2 {
+                font-size: 1.8rem;
+                margin-bottom: 30px;
+            }
+
+            .lab-card {
+                padding: 20px;
+            }
+
+            .lab-card h3 {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
             .labs-grid {
                 grid-template-columns: 1fr;
             }
+
+            .labs-section h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+        .labs-section {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Styling cho các thẻ a nằm trong danh sách của lab-card */
+        .lab-card ul li a {
+            color: #34495e;
+            /* Màu chữ mặc định tối, thanh lịch */
+            text-decoration: none;
+            /* Bỏ gạch chân mặc định */
+            transition: all 0.3s ease;
+            /* Hiệu ứng chuyển động mượt mà */
+            display: inline-block;
+            /* Hỗ trợ hiệu ứng dịch chuyển */
+            font-weight: 500;
+        }
+
+        /* Hiệu ứng khi di chuột vào link */
+        .lab-card ul li a:hover {
+            color: #e74c3c;
+            /* Đổi sang màu đỏ chủ đạo */
+            transform: translateX(5px);
+            /* Dịch nhẹ sang phải tạo cảm giác tương tác */
+            text-decoration: underline;
+            /* Hiện lại gạch chân để rõ đây là link */
         }
     </style>
 </head>
@@ -117,49 +255,109 @@
 
     <main>
         <section class="labs-section">
-            <h2>LAB THỰC HÀNH</h2>
             <div class="labs-grid">
                 <div class="lab-card">
-                    <h3>Lab01: HTML</h3>
-                    <a href="#" class="btn-detail">Xem chi tiết</a>
+                    <div class="card-content">
+                        <h3>Lab01: HTML</h3>
+                        <ul>
+                            <li><a href="Labs/Lab01/Lab01/Vi_du/lab1_bai3.html">lab1_bai3.html</a></li>
+                            <li>
+                                <a href="Labs/Lab01/Lab01/Vi_du/lab1_bai4.html">lab1_bai4.html</a>
+                            </li>
+                        </ul>
+                        <a href="Labs/Lab01/Lab01/Vi_du/index.html" class="btn-detail">Xem chi tiết</a>
+                    </div>
                 </div>
                 <div class="lab-card">
-                    <h3>Lab02: Table & List</h3>
-                    
-                    <a href="https://drive.google.com/drive/folders/1Ao-JN3MPhwzbNIUVI9EmitkBw81HjJlR?usp=sharing" class="btn-detail">Xem chi tiết</a>
+                    <div class="card-content">
+                        <h3>Lab02: Table & List</h3>
+                        <ul>
+                            <li>
+                                <a href="Labs/Lab02Web_UD/Lab02/On.html">lab2_bai1.html</a>
+
+                            </li>
+                            <li>
+                                <a href="Labs/Lab02Web_UD/Lab02/Lab02/lab02_khung_table.html">lab2_bai2.html</a>
+
+                            </li>
+                        </ul>
+                        <a href="Labs/Lab02Web_UD/Lab02/Lab02/Vi_du_Lab01/index.html" class="btn-detail">Xem chi
+                            tiết</a>
+                    </div>
                 </div>
                 <div class="lab-card">
-                    <h3>Lab03: Frame & Form</h3>
-                    
-                    <a href="https://drive.google.com/drive/folders/1WNUoBf6MrVBp9GLfrY3LsKiev6IFzNPV?usp=sharing" class="btn-detail">Xem chi tiết</a>
+                    <div class="card-content">
+                        <h3>Lab03: Frame & Form</h3>
+                        <ul>
+                            <li>
+                                <a href="Labs/Lab03_NMWeb/Lab03/Vi_du/lab03_bai1.html">lab03_bai1.html</a>
+
+                            </li>
+                            <li>
+                                <a href="Labs/Lab03_NMWeb/Lab03/Vi_du/lab03_bai2.html">lab03_bai2.html</a>
+
+                            </li>
+                            <li>
+                                <a href="Labs/Lab03_NMWeb/Lab03/Vi_du/lab03_bai3.html">lab03_bai3.html</a>
+                            </li>
+                        </ul>
+                        <a href="Labs/Lab03_NMWeb/Lab03/Vi_du/index.html" class="btn-detail">Xem chi tiết</a>
+                    </div>
                 </div>
                 <div class="lab-card">
-                    <h3>Lab04: CSS cơ bản</h3>
-                    
-                    <a href="https://drive.google.com/drive/folders/1BxzvKvRWc0NHjq5SzCK0nBxGKfman-R9?usp=sharing" class="btn-detail">Xem chi tiết</a>
+                    <div class="card-content">
+                        <h3>Lab04: CSS cơ bản</h3>
+                        <ul>
+                            <li><a href="Labs/Lab04/Vi_du/lab04_bai1.html">lab04_bai1.html</a></li>
+                            <li><a href="Labs/Lab04/Vi_du/lab04_bai2.html">lab04_bai2.html</a></li>
+                            <li><a href="Labs/Lab04/Vi_du/lab04_bai3.html">lab04_bai3.html</a></li>
+                        </ul>
+                        <a href="Labs/Lab04/Vi_du/index.html" class="btn-detail">Xem chi tiết</a>
+                    </div>
                 </div>
                 <div class="lab-card">
-                    <h3>Lab05: Các thuộc tính CSS</h3>
-                    
-                    <a href="https://drive.google.com/drive/folders/1TBskshXMKqsgfCqD5Ma3yjR8C5z8fbje?usp=sharing" class="btn-detail">Xem chi tiết</a>
+                    <div class="card-content">
+                        <h3>Lab05: Các thuộc tính CSS</h3>
+                        <ul>
+                            <li><a href="Labs/Lab05/lab05_menu.html">lab05_menu.html</a></li>
+                            <li><a href="Labs/Lab05/Vi_du/index.html">lab05_2.html</a></li>
+
+                        </ul>
+                        <a href="Labs/Lab05/Vi_du/index.html" class="btn-detail">Xem chi tiết</a>
+                    </div>
                 </div>
                 <div class="lab-card">
-                    <h3>Lab06: Xây dựng layout responsive bằng CSS</h3>
-                    
-                    <a href="https://drive.google.com/drive/folders/1L49lXQW1J86GlBZlNVhJu4XvgVpSH95q?usp=sharing" class="btn-detail">Xem chi tiết</a>
+                    <div class="card-content">
+                        <h3>Lab06: Xây dựng layout responsive bằng CSS</h3>
+                        <ul>
+                            <li><a href="Labs/Lab06/lab06_ menu_responsive.html">.html</a></li>
+                            <li><a href="Labs/Lab06/lab06_bai02.html">lab06_bai2.html</a></li>
+                            <li><a href="Labs/Lab06/lab06_bai03.html">lab06_bai3.html</a></li>
+                        </ul>
+                        <a href="Labs/Lab06/lab06_bai03.html" class="btn-detail">Xem chi tiết</a>
+                    </div>
                 </div>
                 <div class="lab-card">
-                    <h3>Lab07: Javascript</h3>
-                    <a href="https://drive.google.com/drive/folders/1c1pnvgypSL42oM_q_HzQb2y1U8zf_ylR?usp=sharing" class="btn-detail">Xem chi tiết</a>
+                    <div class="card-content">
+                        <h3>Lab07: Javascript</h3>
+                        <ul>
+                            <li><a href="Labs/Lab07/Vi_du/index.html">Lab07_1</a></li>
+                            <li><a href="Labs/Lab07/demo_bai_2/index.html">Lab07_2</a></li>
+                        </ul>
+                        <a href="https://drive.google.com/drive/folders/1c1pnvgypSL42oM_q_HzQb2y1U8zf_ylR?usp=sharing"
+                            class="btn-detail">Xem chi tiết</a>
+                    </div>
                 </div>
                 <div class="lab-card">
-                    <h3>Lab08: Javascript nâng cao</h3>
-                    <ul>
-                        <li>Lab8_1</li>
-                        <li>Lab8_2</li>
-                        <li>Lab8_3</li>
-                    </ul>
-                    <a href="#" class="btn-detail">Xem chi tiết</a>
+                    <div class="card-content">
+                        <h3>Lab08: Javascript nâng cao</h3>
+                        <ul>
+                            <li>Lab8_1</li>
+                            <li>Lab8_2</li>
+                            <li>Lab8_3</li>
+                        </ul>
+                        <a href="#" class="btn-detail">Xem chi tiết</a>
+                    </div>
                 </div>
             </div>
         </section>

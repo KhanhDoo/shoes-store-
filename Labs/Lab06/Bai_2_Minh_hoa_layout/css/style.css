@@ -1,0 +1,85 @@
+body{
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	max-height: fit-content;
+}
+
+.wrapper {
+	display: flex;
+	/* kich hoat flex box*/
+	flex-flow: row wrap;
+	font-weight: bold;
+	text-align: center;
+}
+
+.wrapper>* {
+	padding: 10px;
+	flex: 1 100%;
+	/* cho tất cả phần tử bên trong có độ dài 100% và tỉ lệ chiếm không gian trống là như nhau*/
+}
+
+.header-flex-2 {
+	background: tomato;
+	order: 1;
+}
+
+.footer-flex-2 {
+	background: lightgreen;
+	order: 5;
+}
+
+.main {
+	text-align: left;
+	background: deepskyblue;
+	height: 400px;
+	flex: 3 0px;
+	/* cho phần nội dung main ở giữa chiếm 3 phần không gian trống so với 2 phần aside bên cạnh */
+	order: 3;
+}
+
+.img-content{
+	object-fit: cover;
+	max-width: 100%;
+}
+
+.aside {
+	flex: 1 0 0 ;
+}
+
+/* 2 phần aside sẽ chỉ chiếm 1 phần không gian */
+.aside-1 {
+	background: gold;
+	height: 400px;
+	order: 2;
+}
+
+.aside-2 {
+	background: hotpink;
+	height: 400px;
+	order: 4;
+}
+
+@media (min-width: 500px) {
+	.main{
+		order: 1;
+		flex: 1 100%;
+	}
+	.aside-1,
+	.aside-2{
+		flex: 1 1 50%;
+	}
+}
+
+@media (min-width: 900px){
+	.aside-1,
+	.aside-2{
+		box-sizing: border-box;
+	}
+}
+@media (max-width:499px) {
+	body{
+		/* font-size: 20px; */
+	}
+	
+}

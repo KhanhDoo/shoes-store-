@@ -1,0 +1,50 @@
+.menu-ngang{
+    display: flex;
+    list-style: none;
+    background-color: aquamarine;
+}
+
+.menu-ngang li {
+    padding: 10px;
+}
+
+.menu-ngang li a {
+    text-decoration: none;
+    font-family: "Playwrite AR Guides", cursive;
+}
+
+.menu-ngang li a:hover {
+    color: white;
+    font-weight: bold;
+}
+
+.menu-ngang li:hover{
+    background-color: orange;
+    border-radius: 5px;
+}
+
+/* menu-doc */
+
+.menu-doc{
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    
+}
+
+.menu-doc li {
+    background-color: cornflowerblue;
+    max-width: 200px;
+    padding: 10px;
+    border-bottom: solid white 1px;
+}
+
+.menu-doc li a {
+    text-decoration: none;
+}
+
+
+.menu-doc li:hover{
+    background-color: aqua;
+    font-style: italic;
+}
